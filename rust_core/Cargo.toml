@@ -1,0 +1,9 @@
+[package]
+name = "insight_uiux_rs"
+version = "1.0.0"
+edition = "2021"
+description = "Rust Core Kernel for InsightUIUX (UX Engine 2.8 & Concentric Radius / Anti-AI-Slop Scanner)"
+
+[[bin]]
+name = "insight_uiux_cli"
+path = "src/main.rs"
