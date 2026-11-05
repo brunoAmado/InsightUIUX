@@ -30,6 +30,14 @@ class InsightUIUXClient {
     return await this._request('/tokens', 'GET');
   }
 
+  async getPenpotTokens(title = 'InsightUIUX Penpot Component') {
+    return await this._request(`/penpot-tokens?title=${encodeURIComponent(title)}`, 'GET');
+  }
+
+  async getPatterns(patternId = 'linear_issue_table_and_command_palette') {
+    return await this._request(`/patterns?pattern_id=${encodeURIComponent(patternId)}`, 'GET');
+  }
+
   async execute(payload = {}) {
     return await this._request('/execute', 'POST', payload);
   }

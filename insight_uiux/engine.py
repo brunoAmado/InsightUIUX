@@ -1,7 +1,8 @@
 """
 `InsightUIUX™` Core Engine (`insight_uiux.engine`).
-Dedicated 2D UI/UX Design System & UX Engine 2.8 Auditor (`:4023 /api/uiux`), distilled from:
+Dedicated 2D UI/UX Design System, Open-Source Penpot W3C Token/SVG Exporter, Sovereign Mobbin Pattern Library & UX Engine 2.8 Auditor (`:4023 /api/uiux`), distilled from:
 - `Book_Lit_Master_UI_UX_Engineering.md` (111 chapters, 89 source books) & `Book_Lit_Master_ui_ux_design.md` (78 chapters)
+- `Book_Context_j9j_d7AGSDc.md` (*I Tested Your Favorite "Alternative" Design Tools* — Penpot, Graphite, Inkscape, Quant-UX, Storybook)
 - `.agents/skills/ux-engine/SKILL.md`:
   * Ch. 1: Anti-AI-Slop Dashboard Architecture (no decorative purple/blue gradients, 1 flat semantic accent `#4f46e5`, 1 primary Hero KPI + 3 compact)
   * Ch. 2: Typography as a 7-Decision Mathematical System (5 sizes on `1.25` modular scale, weights `400` & `600`, `68ch` reading measure)
@@ -9,7 +10,7 @@ Dedicated 2D UI/UX Design System & UX Engine 2.8 Auditor (`:4023 /api/uiux`), di
   * Ch. 4: Form UX ("Validate on Blur, Forgive on Keystroke" `onBlur` -> `onChange`, persistent `<label for="...">` above inputs, example `placeholder` inside inputs)
   * Ch. 5: Desktop Data Tables & Mobile Row Stacking (`font-variant-numeric: tabular-nums`, right-aligned numbers, `40px`/`48px`/`56px` density modes)
   * Ch. 17: 4-State Reactive Completeness (*Loading Skeleton*, *Empty State*, *Error + Retry*, *Populated State*)
-*(Note: Inclusivity & demographic fairness live in `InsightInclude™` `:4020`, and 3D Three.js/Blender/CAD/Interactive Draw/Games live in `InsightDesign™` `:4024`.)*
+*(Note: Inclusivity & demographic fairness live in `InsightInclude™` `:4020`, and 3D Three.js/Blender/CAD/Interactive Draw/Games/Canva-SVG/Slidev live in `InsightDesign™` `:4024`.)*
 """
 
 from __future__ import annotations
@@ -67,6 +68,88 @@ UX_ENGINE_2_8_DESIGN_TOKENS: Dict[str, Any] = {
     },
 }
 
+SOVEREIGN_MOBBIN_REFERENCE_PATTERNS: Dict[str, Dict[str, Any]] = {
+    "linear_issue_table_and_command_palette": {
+        "pattern_id": "linear_issue_table_and_command_palette",
+        "replaces_proprietary_service": "Mobbin SaaS B2B Workspace / Issue Tracker Reference",
+        "reference_apps": ["Linear", "Raycast", "Ashby"],
+        "ux_engine_chapters": ["Ch. 5 Desktop Data Tables & Bulk Selection", "Ch. 7 Command Palette (⌘K)", "Ch. 18 Linear Aesthetic"],
+        "key_rules": [
+            "1px hairline borders (rgba(255,255,255,0.07)), zero zebra striping",
+            "Right-aligned numeric/SLA columns with font-variant-numeric: tabular-nums",
+            "3 density modes (40px Compact, 48px Default, 56px Comfortable) + Shift+Click bulk selection",
+            "Sub-50ms ⌘K / Ctrl+K command palette with roving tabindex",
+        ],
+        "html_blueprint": (
+            '<section style="background:#0f172a;color:#f8fafc;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:16px;font-variant-numeric:tabular-nums;">'
+            '<header style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">'
+            '<label for="cmd-search" style="font-size:12px;font-weight:600;color:#cbd5e1;">Command Filter (Ctrl+K)</label>'
+            '<input id="cmd-search" type="search" placeholder="Filter issues, status, or assignee..." style="background:#090d16;color:#f8fafc;border:1px solid #334155;border-radius:8px;padding:6px 10px;" />'
+            '</header>'
+            '<table style="width:100%;border-collapse:collapse;font-size:15px;">'
+            '<thead><tr style="border-bottom:1px solid rgba(255,255,255,0.07);"><th style="text-align:left;padding:8px;">Issue</th><th style="text-align:right;padding:8px;">Latency (ms)</th></tr></thead>'
+            '<tbody><tr style="height:48px;"><td style="padding:8px;">SET-104 · MID Class B Telemetry</td><td style="text-align:right;padding:8px;">4.2 ms</td></tr></tbody>'
+            '</table></section>'
+        ),
+    },
+    "stripe_checkout_and_onblur_form": {
+        "pattern_id": "stripe_checkout_and_onblur_form",
+        "replaces_proprietary_service": "Mobbin High-Conversion Checkout & Auth Form Reference",
+        "reference_apps": ["Stripe Checkout", "Revolut", "Clerk"],
+        "ux_engine_chapters": ["Ch. 4 Validate on Blur, Forgive on Keystroke", "Ch. 15 Specialized High-Conversion Inputs"],
+        "key_rules": [
+            "Persistent <label for='...'> above every input; placeholder strictly inside input box",
+            "Validate first on blur; switch invalid field to live input listener to clear error immediately",
+            "16px minimum input font size on mobile to prevent iOS Safari auto-zoom",
+        ],
+        "html_blueprint": (
+            '<form novalidate style="background:#0f172a;color:#f8fafc;border-radius:16px;padding:16px;display:grid;gap:12px;">'
+            '<label for="fiscal-nif" style="font-size:12px;font-weight:600;color:#cbd5e1;">Portuguese NIF (9 Digits)</label>'
+            '<input id="fiscal-nif" name="nif" inputmode="numeric" placeholder="e.g. 509123456" style="background:#090d16;color:#f8fafc;border:1px solid #334155;border-radius:8px;padding:8px 12px;font-size:16px;font-variant-numeric:tabular-nums;" />'
+            '<button type="submit" style="background:#4f46e5;color:#ffffff;border:none;border-radius:8px;padding:10px 16px;font-weight:600;">Verify & Settle</button>'
+            '</form>'
+        ),
+    },
+    "raycast_hero_kpi_and_4state_dashboard": {
+        "pattern_id": "raycast_hero_kpi_and_4state_dashboard",
+        "replaces_proprietary_service": "Mobbin Analytics & Telemetry Dashboard Reference",
+        "reference_apps": ["Raycast", "Vercel Analytics", "Grafana"],
+        "ux_engine_chapters": ["Ch. 1 Anti-AI-Slop Dashboard Architecture", "Ch. 14 Honest Dashboard Charts", "Ch. 17 Reactive State Machines"],
+        "key_rules": [
+            "Break equal-card monotony: 1 Primary Hero KPI card large + 3 Secondary KPI cards compact",
+            "Drop pastel icon tiles on metric cards — the metric number is the hero",
+            "Spec all 4 mandatory states: Loading Skeleton, Empty State CTA, Error + Retry, Populated Hero Metric",
+        ],
+        "html_blueprint": (
+            '<section style="background:#090d16;color:#f8fafc;padding:16px;border-radius:16px;font-variant-numeric:tabular-nums;" aria-live="polite">'
+            '<div style="background:#0f172a;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:20px;margin-bottom:12px;">'
+            '<div style="font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;">Primary Grid Load (Hero KPI)</div>'
+            '<div style="font-size:30px;font-weight:600;letter-spacing:-0.02em;line-height:1.15;margin-top:4px;">18.42 kW</div>'
+            '</div></section>'
+        ),
+    },
+    "citysocket_375px_mobile_nfc_tap": {
+        "pattern_id": "citysocket_375px_mobile_nfc_tap",
+        "replaces_proprietary_service": "Mobbin Mobile IoT & EV Charging Flow Reference",
+        "reference_apps": ["CitySocket", "Tesla Mobile", "Apple Wallet NFC"],
+        "ux_engine_chapters": ["Ch. 5 Mobile Row Stacking", "Ch. 9 5s Soft-Delete Undo Toast", "Ch. 20 375px Mobile Readiness"],
+        "key_rules": [
+            "375px viewport readiness with >= 44x44px coarse-pointer touch targets",
+            "Stack mobile rows into 2 lines: Identity top-left, tabular-nums Metric top-right",
+            "5-second soft-stop undo toast for session termination",
+        ],
+        "html_blueprint": (
+            '<section style="max-width:375px;background:#0f172a;color:#f8fafc;border-radius:16px;padding:16px;font-variant-numeric:tabular-nums;">'
+            '<div style="display:flex;justify-content:space-between;align-items:center;">'
+            '<span style="font-size:15px;font-weight:600;">Lamppost #LP-042 (NTAG 424)</span>'
+            '<span style="font-size:15px;font-weight:600;color:#10b981;">7.40 kW</span>'
+            '</div>'
+            '<button type="button" style="margin-top:12px;width:100%;min-height:44px;background:#4f46e5;color:#ffffff;border:none;border-radius:8px;font-weight:600;">Authorize EV Session</button>'
+            '</section>'
+        ),
+    },
+}
+
 
 def compute_concentric_border_radius(inner_radius_px: int = 8, padding_px: int = 8) -> Dict[str, int]:
     """Enforces Chapter 3 Concentric Border Radius Law: R_outer = R_inner + padding."""
@@ -76,6 +159,85 @@ def compute_concentric_border_radius(inner_radius_px: int = 8, padding_px: int =
         "inner_radius_px": inner,
         "padding_px": pad,
         "outer_radius_px": inner + pad,
+    }
+
+
+def export_penpot_w3c_tokens_and_svg(component_title: str = "InsightUIUX Penpot Component") -> Dict[str, Any]:
+    """
+    Open-Source Figma Replacement (`Penpot` MPL-2.0):
+    Exports UX Engine 2.8 tokens in the standard W3C Design Tokens Community Group (DTCG) format
+    (`$value`, `$type`) natively imported by Penpot & Style Dictionary, plus a Penpot-ready SVG/Flexbox artboard.
+    """
+    safe_title = str(component_title or "InsightUIUX Penpot Component")
+    w3c_tokens = {
+        "$schema": "https://tr.designtokens.org/format/",
+        "open_source_target": "Penpot (https://github.com/penpot/penpot - MPL-2.0)",
+        "color": {
+            "canvas-bg": {"$value": "#090d16", "$type": "color"},
+            "panel-bg": {"$value": "#0f172a", "$type": "color"},
+            "surface-bg": {"$value": "#172033", "$type": "color"},
+            "primary-accent": {"$value": "#4f46e5", "$type": "color"},
+            "focus-ring": {"$value": "#818cf8", "$type": "color"},
+            "text-primary": {"$value": "#f8fafc", "$type": "color"},
+            "text-secondary": {"$value": "#cbd5e1", "$type": "color"},
+            "text-muted": {"$value": "#94a3b8", "$type": "color"},
+        },
+        "dimension": {
+            "radius-sm": {"$value": "4px", "$type": "dimension"},
+            "radius-md": {"$value": "8px", "$type": "dimension"},
+            "radius-lg": {"$value": "16px", "$type": "dimension"},
+            "density-compact": {"$value": "40px", "$type": "dimension"},
+            "density-default": {"$value": "48px", "$type": "dimension"},
+            "density-comfortable": {"$value": "56px", "$type": "dimension"},
+        },
+        "fontSizes": {
+            "xs": {"$value": "12px", "$type": "dimension"},
+            "sm": {"$value": "15px", "$type": "dimension"},
+            "md": {"$value": "19px", "$type": "dimension"},
+            "lg": {"$value": "24px", "$type": "dimension"},
+            "xl": {"$value": "30px", "$type": "dimension"},
+        },
+    }
+    penpot_svg = (
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 240" width="640" height="240" data-penpot-artboard="true">'
+        '<rect x="0" y="0" width="640" height="240" rx="16" fill="#0f172a" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>'
+        '<rect x="16" y="16" width="608" height="208" rx="8" fill="#172033"/>'
+        f'<text x="36" y="60" fill="#f8fafc" font-family="Inter, system-ui, sans-serif" font-size="24" font-weight="600">{safe_title}</text>'
+        '<text x="36" y="96" fill="#cbd5e1" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="400">Open-Source Penpot Native SVG + W3C Design Tokens (Zero Figma Lock-in)</text>'
+        '<rect x="36" y="136" width="180" height="44" rx="8" fill="#4f46e5"/>'
+        '<text x="64" y="163" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="600">Inspect Artboard</text>'
+        '</svg>'
+    )
+    return {
+        "ok": True,
+        "replaces_proprietary_tool": "Figma",
+        "open_source_stack": ["Penpot (MPL-2.0)", "Quant-UX", "Storybook (MIT)"],
+        "w3c_design_tokens": w3c_tokens,
+        "penpot_svg_artboard": penpot_svg,
+        "cas_svg_uri": build_cas_uri(penpot_svg),
+    }
+
+
+def get_sovereign_mobbin_pattern(pattern_id: str = "linear_issue_table_and_command_palette") -> Dict[str, Any]:
+    """
+    Open-Source Mobbin Replacement:
+    Returns reference-grounded UI blueprints distilled from ChronicleRAG's 111-chapter Master UI/UX Book.
+    """
+    key = str(pattern_id or "").strip().lower()
+    chosen = SOVEREIGN_MOBBIN_REFERENCE_PATTERNS.get(
+        key,
+        SOVEREIGN_MOBBIN_REFERENCE_PATTERNS["linear_issue_table_and_command_palette"],
+    )
+    return {
+        "ok": True,
+        "replaces_proprietary_tool": "Mobbin",
+        "open_source_stack": [
+            "ChronicleRAG Book_Lit_Master_UI_UX_Engineering.md (111 Chapters)",
+            "shadcn/ui + Radix Primitives (MIT)",
+            "OpenUI + Playwright DOM Inspector",
+        ],
+        "available_patterns": list(SOVEREIGN_MOBBIN_REFERENCE_PATTERNS.keys()),
+        "selected_pattern": chosen,
     }
 
 
@@ -140,14 +302,19 @@ class InsightUIUXEngine:
         return {
             "ok": True,
             "product": "InsightUIUX™",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "port": self.DEFAULT_PORT,
             "api_prefix": self.API_PREFIX,
             "core_tier": "insightCoreIO + insightCoreAI",
-            "mandate": "Dedicated 2D UI/UX Design System & UX Engine 2.8 (Anti-AI-Slop, 7-Decision Typography, Concentric Radii, Tinted Dark Mode & 4-State Reactive Machines)",
+            "mandate": "Dedicated 2D UI/UX Design System, Open-Source Penpot W3C Tokens/SVG, Sovereign Mobbin Pattern Library & UX Engine 2.8",
+            "open_source_replacements": {
+                "figma_replacement": "Penpot (MPL-2.0) W3C Design Tokens + Native SVG Artboards + Storybook",
+                "mobbin_replacement": "ChronicleRAG 111-Chapter Sovereign Pattern Library + shadcn/Radix Blueprints",
+            },
             "extracted_from": [
                 "Book_Lit_Master_UI_UX_Engineering.md (111 Chapters)",
                 "Book_Lit_Master_ui_ux_design.md (78 Chapters)",
+                "Book_Context_j9j_d7AGSDc.md (Open-Source Alternative Design Tools: Penpot, Graphite, Inkscape)",
                 ".agents/skills/ux-engine/SKILL.md",
             ],
             "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -167,15 +334,21 @@ class InsightUIUXEngine:
         markup = str(data.get("html_or_css", data.get("html", default_markup)))
         inner_r = int(data.get("inner_radius_px", 8))
         pad_px = int(data.get("padding_px", 8))
+        pattern_id = str(data.get("pattern_id", "linear_issue_table_and_command_palette"))
+        component_title = str(data.get("component_title", "SetMiddle Penpot Artboard"))
 
         audit = audit_uiux_engine_2_8(markup)
         concentric = compute_concentric_border_radius(inner_r, pad_px)
+        penpot_bundle = export_penpot_w3c_tokens_and_svg(component_title)
+        mobbin_pattern = get_sovereign_mobbin_pattern(pattern_id)
         return {
             "ok": True,
             "member": self.MEMBER_ID,
             "ux_engine_2_8_audit": audit,
             "concentric_border_radius": concentric,
             "design_tokens": UX_ENGINE_2_8_DESIGN_TOKENS,
+            "penpot_open_source_export": penpot_bundle,
+            "sovereign_mobbin_pattern": mobbin_pattern,
             "cas_uri": build_cas_uri(markup),
         }
 
