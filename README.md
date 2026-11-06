@@ -17,3 +17,14 @@
 - `node_sdk/index.js`: Universal JavaScript / Node.js SDK (`InsightUIUXClient`).
 - `ui_component/insight-uiux.ts`: Standards-based TypeScript Web Component (`<insight-uiux>`).
 - `tests/test_insight_uiux.py`: Unit, Unhappy-Path & Regression Test Suite.
+
+
+---
+
+## 📚 Documentation, Getting Started, How-To Guides, Wiki & Security
+
+- 🚀 **[Getting Started & Quickstart (`docs/GETTING_STARTED.md`)](./docs/GETTING_STARTED.md)** — Prerequisites, installation, running on port `:4023`, and test execution (`python -m unittest discover -s tests -v`).
+- 🛠️ **[How-To Guides & Practical Recipes (`docs/HOW_TO_GUIDES.md`)](./docs/HOW_TO_GUIDES.md)** — Step-by-step REST API, Python/Node SDK, `<insight-uiux>` Web Component, and `InsightChat™ (:4012)` usage.
+- 🏛️ **[Architecture & Deep-Dive Explanation (`docs/ARCHITECTURE_AND_EXPLANATION.md`)](./docs/ARCHITECTURE_AND_EXPLANATION.md)** — 4-Layer Polyglot architecture, Mermaid data flow, and `InsightCore™` integration.
+- 🔐 **[Security Policy & PT/EU Compliance (`SECURITY.md`)](./SECURITY.md)** · **[Full Security Dossier (`docs/SECURITY_AND_COMPLIANCE.md`)](./docs/SECURITY_AND_COMPLIANCE.md)** — CNPD/GDPR `Lei n.º 58/2019`, EU AI Act `2024/1689`, Portugal `DL n.º 82/2022` (WCAG 2.2 AA), NIS2/CRA, and AT fiscal compliance (`RULE-11`).
+- 🧭 **[Project Wiki Home (`wiki/Home.md`)](./wiki/Home.md)** · **[Complete `docs/` Index (`docs/DOCS_INDEX.md`)](./docs/DOCS_INDEX.md)**
