@@ -1,7 +1,7 @@
 # Certified End-to-End User Story & Time-Lapse KPI Contract: InsightUIUX (`SetMiddle Insight™`)
 
 - **Historical Continuity Verified**: `2022–2026` (Legacy Repo Docs + OpenAI ChatGPT + Gemini Web + Antigravity IDE + Git Commits)
-- **Ingested Project-Root Documentation (`CA-ERR-07` Zero-AI-Chat Fallback)**: `18` file(s) in `C:/Users/bruno/PycharmProjects/InsightUIUX`
+- **Ingested Project-Root Documentation (`CA-ERR-07` Zero-AI-Chat Fallback)**: `20` file(s) in `C:/Users/bruno/PycharmProjects/InsightUIUX`
 - **Supervised & Corrected By**: `ChronicleRAG (:8765)` + `Context-Assistant (:8090)`
 - **Service Port & Co-Hosted Demo**: Port `:4023` · `/projects/insight-uiux`
 - **Primary Hero KPI**: `CHRONICLE UX ENGINE SPECIFICATION` (`v2.8`)
@@ -22,9 +22,9 @@
 - `docs/HOW_TO_GUIDES.md`
 - `docs/SECURITY_AND_COMPLIANCE.md`
 - `docs/epics/insightuiux-2d-design-system-and-ux-engine-2-8.epic.md`
+- `docs/stories/concentric-border-radius-and-7-decision-typography-tokens.feature`
 - `docs/stories/concentric-border-radius-and-7-decision-typography-tokens.story.md`
-- `docs/stories/reactive-4-state-and-validate-on-blur-web-component.story.md`
-- `docs/stories/ux-engine-2-8-anti-ai-slop-dom-and-css-linter.story.md`
+- `docs/stories/reactive-4-state-and-validate-on-blur-web-component.feature`
 
 ## Verified Domain Capabilities
 - Anti-AI-Slop DOM & CSS linter (bans purple-to-blue gradients, pastel icon tiles, and equal-card monotony)
