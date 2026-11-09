@@ -102,6 +102,36 @@ class TestInsightUIUX(unittest.TestCase):
         self.assertTrue(scrub_body["cnpd_gdpr_compliant"])
         self.assertNotIn("123456789", scrub_body["scrubbed_text"])
 
+    def test_06_inline_mic_adornment_dedicated_wrapper_and_concentric_bounds(self) -> None:
+        # Unhappy path: inline mic button appended directly to shared parent containing <label> or '+ Set' button
+        bad_mic_markup = (
+            '<div style="background:#0f172a;font-variant-numeric:tabular-nums;">'
+            '<label for="new-partition-input">Folder</label>'
+            '<input id="new-partition-input" type="text" />'
+            '<button onclick="applyCustomNewFolder()">+ Set</button>'
+            '<button class="chronicle-inline-mic-btn">🎙️</button>'
+            "</div>"
+        )
+        bad_audit = audit_uiux_engine_2_8(bad_mic_markup)
+        self.assertFalse(bad_audit["anti_ai_slop_pass"])
+        rules = [v["rule"] for v in bad_audit["slop_violations"]]
+        self.assertIn("CH4_INLINE_ADORNMENT_DEDICATED_WRAPPER", rules)
+        self.assertIn("CH4_INLINE_ADORNMENT_CONCENTRIC_BOUNDS", rules)
+
+        # Happy path: dedicated `.chronicle-input-mic-wrap` with concentric bounds (`max-height:calc(100% - 6px)`)
+        good_mic_markup = (
+            '<div style="background:#0f172a;font-variant-numeric:tabular-nums;">'
+            '<label for="ingest-custom-tags-input">4. Custom Tags:</label>'
+            '<div class="chronicle-input-mic-wrap relative flex items-center w-full">'
+            '<input id="ingest-custom-tags-input" type="text" style="box-sizing:border-box;padding-right:29px;" />'
+            '<button class="chronicle-inline-mic-btn" style="position:absolute;right:5px;top:50%;transform:translateY(-50%);width:20px;height:20px;max-height:calc(100% - 6px);box-sizing:border-box;">🎙️</button>'
+            "</div></div>"
+        )
+        good_audit = audit_uiux_engine_2_8(good_mic_markup)
+        self.assertTrue(good_audit["anti_ai_slop_pass"])
+        self.assertTrue(good_audit["checks"]["inline_adornment_dedicated_wrapper_valid"])
+        self.assertTrue(good_audit["checks"]["inline_adornment_concentric_bounds_valid"])
+
 
 if __name__ == "__main__":
     unittest.main()

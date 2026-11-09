@@ -243,12 +243,18 @@ def get_sovereign_mobbin_pattern(pattern_id: str = "linear_issue_table_and_comma
 
 def audit_uiux_engine_2_8(html_or_css: str) -> Dict[str, Any]:
     """
-    Deterministic UX Engine 2.8 Anti-AI-Slop & Design System Linter:
+    Deterministic UX Engine 2.8+ Anti-AI-Slop & Design System Linter:
     1. Rejects pure `#000000` terminal black backgrounds (requires tinted dark `#090d16` / `#0f172a` / `#172033`).
     2. Rejects decorative AI-slop linear-gradients on generic headers/cards.
     3. Verifies `<label for="...">` + input `placeholder` separation.
     4. Verifies `tabular-nums` for numeric scannability.
-    5. Computes an Anti-AI-Slop Craft Score (`0.0` - `10.0`).
+    5. Verifies `CH4_INLINE_ADORNMENT_DEDICATED_WRAPPER`: never anchor an inline input button (`.chronicle-inline-mic-btn`)
+       directly to a parent container (`el.parentElement.appendChild(btn)`) that also holds a `<label>` or sibling `<button>`
+       (e.g., `+ Set`), which causes the microphone button to overlap sibling buttons or straddle the input top border.
+    6. Verifies `CH4_INLINE_ADORNMENT_CONCENTRIC_BOUNDS`: inline input adornments must stay strictly inside the input border
+       (`max-height: calc(100% - 6px)` / `20px x 20px`) with reserved inner `padding-right` (`box-sizing: border-box`) so
+       the input box never grows taller or wider.
+    7. Computes an Anti-AI-Slop Craft Score (`0.0` - `10.0`).
     """
     snippet = str(html_or_css or "")
     slop_violations: List[Dict[str, str]] = []
@@ -273,6 +279,41 @@ def audit_uiux_engine_2_8(html_or_css: str) -> Dict[str, Any]:
             "remediation": "Every <input>/<textarea> must have a persistent <label for='...'> above it.",
         })
 
+    # Rule 5: Detect inline input adornment anchored directly to shared parent (`parent.appendChild(btn)`) without `.chronicle-input-mic-wrap`
+    # or static HTML where `.chronicle-inline-mic-btn` shares a parent with a `<label>` or sibling action `<button>`.
+    has_inline_mic = "chronicle-inline-mic-btn" in snippet or "attachUniversalVoiceMicButtons" in snippet
+    has_dedicated_mic_wrap = "chronicle-input-mic-wrap" in snippet
+    has_unwrapped_parent_append = bool(
+        re.search(r"parent\.appendChild\(\s*btn\s*\)", snippet)
+        and has_inline_mic
+        and not has_dedicated_mic_wrap
+    )
+    has_shared_label_or_btn_collision = bool(
+        re.search(
+            r"<div[^>]*>\s*(?:<label\b[^>]*>.*?</label>\s*<input\b[^>]*>\s*<button[^>]*chronicle-inline-mic-btn|<input\b[^>]*>\s*<button\b(?![^>]*chronicle-inline-mic-btn)[^>]*>.*?</button>\s*<button[^>]*chronicle-inline-mic-btn)",
+            snippet,
+            flags=re.IGNORECASE | re.DOTALL,
+        )
+    )
+    if (has_inline_mic and not has_dedicated_mic_wrap) or has_unwrapped_parent_append or has_shared_label_or_btn_collision:
+        slop_violations.append({
+            "rule": "CH4_INLINE_ADORNMENT_DEDICATED_WRAPPER",
+            "remediation": (
+                "Wrap each <input>/<textarea> in a dedicated `.chronicle-input-mic-wrap` (`position: relative; display: flex; align-items: center;`) "
+                "before attaching `.chronicle-inline-mic-btn` so the mic never overlaps sibling buttons (e.g. '+ Set') or shifts upward into <label> height."
+            ),
+        })
+
+    # Rule 6: Detect oversized inline mic button without concentric inner-height guard (`max-height:calc(100% - 6px)` & `box-sizing:border-box`)
+    if has_inline_mic and ("max-height:calc(100% - 6px)" not in snippet.replace(" ", "") and "max-height:calc(100%-6px)" not in snippet.replace(" ", "")):
+        slop_violations.append({
+            "rule": "CH4_INLINE_ADORNMENT_CONCENTRIC_BOUNDS",
+            "remediation": (
+                "Constrain `.chronicle-inline-mic-btn` strictly inside the input border (`width:20px;height:20px;max-height:calc(100% - 6px);top:50%;transform:translateY(-50%)`) "
+                "with `box-sizing:border-box` and `padding-right` on the input so the button never exits the input border or increases input height."
+            ),
+        })
+
     has_tabular_nums = "tabular-nums" in snippet
     has_tinted_slate = any(hex_col in snippet.lower() for hex_col in ("#090d16", "#0f172a", "#172033"))
 
@@ -287,6 +328,8 @@ def audit_uiux_engine_2_8(html_or_css: str) -> Dict[str, Any]:
             "tinted_dark_slate_present": has_tinted_slate,
             "tabular_nums_present": has_tabular_nums,
             "label_for_binding_valid": (not has_inputs) or has_label_for,
+            "inline_adornment_dedicated_wrapper_valid": (not has_inline_mic) or (has_dedicated_mic_wrap and not has_shared_label_or_btn_collision),
+            "inline_adornment_concentric_bounds_valid": (not has_inline_mic) or ("max-height:calc(100%-6px)" in snippet.replace(" ", "")),
             "validation_timing_pattern": "VALIDATE_ON_BLUR_FORGIVE_ON_KEYSTROKE",
             "four_states_required": ["LOADING_SKELETON", "EMPTY_STATE_CTA", "ERROR_WITH_RETRY", "POPULATED_HERO_METRIC"],
         },
