@@ -26,6 +26,7 @@ if _INSIGHT_CORE_DIR.exists() and str(_INSIGHT_CORE_DIR) not in sys.path:
     sys.path.insert(0, str(_INSIGHT_CORE_DIR))
 
 from insight_core_io import assert_no_binary_blob_in_db_row, build_cas_uri, scrub_pt_eu_pii_and_byok_secrets
+from insight_uiux.react19_anti_slop import audit_react19_async_anti_slop
 
 UX_ENGINE_2_8_DESIGN_TOKENS: Dict[str, Any] = {
     "surfaces_tinted_dark_slate": {
@@ -345,7 +346,7 @@ class InsightUIUXEngine:
         return {
             "ok": True,
             "product": "InsightUIUX™",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "port": self.DEFAULT_PORT,
             "api_prefix": self.API_PREFIX,
             "core_tier": "insightCoreIO + insightCoreAI",

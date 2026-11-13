@@ -5,11 +5,12 @@ Can be mounted standalone (`:4023`) or inside `ChronicleRAG` (`:8765`).
 
 from typing import Any, Dict
 from fastapi import APIRouter, Body, FastAPI, Query
-from fastapi.responses import Response
+from fastapi.responses import JSONResponse, Response
 
 from insight_uiux.engine import (
     InsightUIUXEngine,
     UX_ENGINE_2_8_DESIGN_TOKENS,
+    audit_react19_async_anti_slop,
     export_penpot_w3c_tokens_and_svg,
     get_sovereign_mobbin_pattern,
 )
@@ -38,6 +39,11 @@ def create_insight_uiux_router() -> APIRouter:
     @router.post("/execute")
     def execute_action(payload: Dict[str, Any] = Body(default={})) -> Dict[str, Any]:
         return engine.execute(payload)
+
+    @router.post("/audit-react19")
+    def post_audit_react19(payload: Dict[str, Any] = Body(default={})) -> Any:
+        res = audit_react19_async_anti_slop(str(payload.get("code_snippet", payload.get("code", ""))))
+        return res if res.get("ok") else JSONResponse(status_code=400, content=res)
 
     @router.post("/scrub")
     def scrub_text(payload: Dict[str, Any] = Body(default={})) -> Dict[str, Any]:

@@ -23,3 +23,7 @@ Welcome to the official knowledge base for **`InsightUIUX™`** (`:4023 /api/uiu
 | 🔐 **Security & PT/EU Compliance (`RULE-11`)** | [03-Security-Privacy-and-PT-EU-Compliance.md](./03-Security-Privacy-and-PT-EU-Compliance.md) | [`SECURITY.md`](../SECURITY.md) · [`docs/SECURITY_AND_COMPLIANCE.md`](../docs/SECURITY_AND_COMPLIANCE.md) |
 | 🏛️ **Architecture & Deep-Dive Explanation** | [04-Architecture-and-Ecosystem-Explanation.md](./04-Architecture-and-Ecosystem-Explanation.md) | [`docs/ARCHITECTURE.md`](../docs/ARCHITECTURE.md) · [`docs/ARCHITECTURE_AND_EXPLANATION.md`](../docs/ARCHITECTURE_AND_EXPLANATION.md) |
 | 📂 **Complete `docs/` Index** | — | [`docs/DOCS_INDEX.md`](../docs/DOCS_INDEX.md) |
+
+## v1.2.0 React 19 Async-Waterfall & Derived-Effect Anti-Slop Lint Cards
+- Added POST /audit-react19 (insight_uiux.react19_anti_slop).
+

@@ -5,3 +5,7 @@
 - **Open-Source Figma Replacement (`Penpot` + W3C DTCG Tokens)**: `export_penpot_w3c_tokens_and_svg()` outputs standard W3C Design Tokens (`$value`, `$type`) and native SVG/Flexbox artboards for **Penpot (MPL-2.0)** and **Storybook**.
 - **Open-Source Mobbin Replacement (`SOVEREIGN_MOBBIN_REFERENCE_PATTERNS`)**: `get_sovereign_mobbin_pattern()` serves production-verified HTML/CSS blueprints for *Linear Issue Tables*, *Stripe `onBlur` Checkout Forms*, *Raycast Hero KPI Dashboards*, and *CitySocket `375px` Mobile Flows*.
 - **Anti-AI-Slop Linter & Concentric Border Radius Calculator**: Rejects `#000000` pure black and decorative purple-to-blue gradients, and enforces $R_{\text{outer}} = R_{\text{inner}} + \text{padding}$.
+
+## v1.2.0 React 19 Async-Waterfall & Derived-Effect Anti-Slop Lint Cards
+- Added POST /audit-react19 (insight_uiux.react19_anti_slop).
+

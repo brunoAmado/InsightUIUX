@@ -118,6 +118,29 @@ class TestInsightUIUX(unittest.TestCase):
         self.assertIn("CH4_INLINE_ADORNMENT_DEDICATED_WRAPPER", rules)
         self.assertIn("CH4_INLINE_ADORNMENT_CONCENTRIC_BOUNDS", rules)
 
+    def test_07_react19_async_waterfall_useeffect_and_abortcontroller_lint(self) -> None:
+        bad_tsx = (
+            "function ChatForm() {\n"
+            "  useEffect(() => { setDerivedTotal(items.length); }, [items]);\n"
+            "  async function onSubmit() {\n"
+            "    const a = await fetch('/api/a');\n"
+            "    const b = await fetch('/api/b');\n"
+            "  }\n"
+            "  return <input style='font-size:12px' />;\n"
+            "}\n"
+        )
+        r = self.client.post("/api/uiux/audit-react19", json={"code_snippet": bad_tsx})
+        self.assertEqual(r.status_code, 200)
+        body = r.json()
+        self.assertFalse(body["react19_clean"])
+        found = {c["rule"] for c in body["lint_cards"]}
+        self.assertIn("REACT19_ASYNC_WATERFALL_USE_PROMISE_ALL", found)
+        self.assertIn("REACT19_DERIVED_STATE_IN_USEEFFECT", found)
+        self.assertIn("UX28_MISSING_ABORT_CONTROLLER", found)
+        self.assertIn("UX28_MOBILE_INPUT_BELOW_16PX", found)
+
+        self.assertEqual(self.client.post("/api/uiux/audit-react19", json={"code_snippet": ""}).status_code, 400)
+
         # Happy path: dedicated `.chronicle-input-mic-wrap` with concentric bounds (`max-height:calc(100% - 6px)`)
         good_mic_markup = (
             '<div style="background:#0f172a;font-variant-numeric:tabular-nums;">'
