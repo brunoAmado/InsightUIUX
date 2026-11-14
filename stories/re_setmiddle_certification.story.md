@@ -13,6 +13,8 @@
 **So that** I receive human-readable Data Science insights, while the DevOps Time-Lapse KPI Engine automatically logs `timestamp_iso`, `elapsed_ms`, queue state, and a `SHA-256` audit receipt.
 
 ## Ingested Legacy & Project-Root Documentation Grounding
+- `AGENTS.md`
+- `GEMINI.md`
 - `README.md`
 - `SECURITY.md`
 - `docs/ARCHITECTURE.md`
@@ -23,8 +25,6 @@
 - `docs/SECURITY_AND_COMPLIANCE.md`
 - `docs/epics/insightuiux-2d-design-system-and-ux-engine-2-8.epic.md`
 - `docs/stories/concentric-border-radius-and-7-decision-typography-tokens.feature`
-- `docs/stories/concentric-border-radius-and-7-decision-typography-tokens.story.md`
-- `docs/stories/reactive-4-state-and-validate-on-blur-web-component.feature`
 
 ## Verified Domain Capabilities
 - Anti-AI-Slop DOM & CSS linter (bans purple-to-blue gradients, pastel icon tiles, and equal-card monotony)
